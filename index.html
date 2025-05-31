@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🧮 Math Plus</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    header {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      color: #2c3e50;
+      margin-bottom: 10px;
+      user-select: none;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background-color: #3498db;
+      border: none;
+      color: white;
+      padding: 12px 22px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      min-width: 100px;
+    }
+
+    nav button:hover {
+      background-color: #2980b9;
+    }
+
+    nav button.active {
+      background-color: #e67e22;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    main {
+      width: 100%;
+      max-width: 900px;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .descripcion-inicio {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: #444;
+      user-select: none;
+      margin-bottom: 1.3rem;
+      line-height: 1.5;
+    }
+
+    #inicio img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 15px;
+      user-select: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #34495e;
+      margin-bottom: 15px;
+      user-select: none;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+
+    ul li a {
+      color: #2980b9;
+      text-decoration: none;
+    }
+
+    ul li a:hover {
+      text-decoration: underline;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      padding: 8px 10px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1.5px solid #ccc;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 15px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: #2980b9;
+      outline: none;
+    }
+
+    .action-btn {
+      background-color: #27ae60;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      margin-top: 5px;
+      min-width: 140px;
+    }
+
+    .action-btn:hover {
+      background-color: #1e8449;
+    }
+
+    #resultado {
+      margin-top: 15px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #16a085;
+      user-select: none;
+    }
+
+    #tablaResultado {
+      padding-left: 0;
+      color: #d35400;
+      font-size: 1.15rem;
+      list-style-type: none;
+      user-select: none;
+      margin-top: 15px;
+    }
+
+    #tablaResultado li {
+      margin-bottom: 6px;
+    }
+
+    #video-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    video {
+      width: 100%;
+      max-width: 640px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      user-select: none;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Recuadros para recursos y consejos */
+    .recuadro-info {
+      background-color: #e8f6ff;
+      border: 2px solid #3498db;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 20px;
+      box-shadow: 0 2px 6px rgba(223, 198, 198, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .recuadro-info:hover {
+      transform: scale(1.01);
+    }
+
+    .recuadro-info h3 {
+      color: #52debd;
+      margin-bottom: 12px;
+    }
+
+    .recuadro-info ul {
+      padding-left: 20px;
+    }
+
+    .recuadro-info li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧮 Math Plus</h1>
+    <nav>
+      <button class="active" data-target="inicio">Inicio</button>
+      <button data-target="calculadora">Calculadora</button>
+      <button data-target="tabla">Tabla Multiplicar</button>
+      <button data-target="video">Video</button>
+      <button data-target="contacto">Contacto</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="active">
+      <h2>Bienvenido a Math Plus</h2>
+      <p class="descripcion-inicio">
+        Math Plus es tu plataforma educativa interactiva para aprender y practicar operaciones matemáticas básicas. 
+        Aquí podrás hacer sumas, restas, multiplicaciones y divisiones fácilmente, además de generar tablas de multiplicar de forma rápida y visual.
+      </p>
+      <p class="descripcion-inicio">
+        Nuestra misión es ayudarte a mejorar tus habilidades numéricas con una herramienta intuitiva y divertida.
+      </p>
+      <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=800&q=80" alt="Calculadora con números en horizontal" />
+
+      <article class="recuadro-info">
+  <h3>Recursos recomendados</h3>
+  <ul>
+    <li>📘 <a href="https://es.khanacademy.org" target="_blank">Khan Academy</a></li>
+    <li>🎲 <a href="https://www.mathsisfun.com" target="_blank">Math is Fun</a></li>
+    <li>🔍 <a href="https://www.wolframalpha.com" target="_blank">Wolfram Alpha</a></li>
+    <li>📬 <a href="#contacto" class="nav-link">Contacto</a></li>
+  </ul>
+</article>
+
+
+      <article class="recuadro-info">
+        <h3>Consejos prácticos</h3>
+        <ul>
+          <li>Practica operaciones todos los días para mejorar la agilidad mental.</li>
+          <li>Utiliza las tablas de multiplicar para resolver cálculos rápidos.</li>
+          <li>Mira los videos para entender mejor los conceptos.</li>
+          <li>Envía tus dudas a través del formulario de contacto.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="calculadora">
+      <h2>Calculadora Básica</h2>
+
+      <label for="nombreUsuario">Ingresa tu nombre:</label>
+      <input type="text" id="nombreUsuario" placeholder="Tu nombre" />
+
+      <label for="numero1">Número 1:</label>
+      <input type="number" id="numero1" placeholder="Ingrese primer número" />
+
+      <label for="numero2">Número 2:</label>
+      <input type="number" id="numero2" placeholder="Ingrese segundo número" />
+
+      <label for="operacion">Selecciona la operación:</label>
+      <select id="operacion">
+        <option value="sumar">Suma (+)</option>
+        <option value="restar">Resta (-)</option>
+        <option value="multiplicar">Multiplicación (×)</option>
+        <option value="dividir">División (÷)</option>
+      </select>
+
+      <button class="action-btn" onclick="calcular()">Calcular</button>
+
+      <div id="resultado"></div>
+    </section>
+
+    <section id="tabla">
+      <h2>Generar Tabla de Multiplicar</h2>
+      <input type="number" id="tablaNum" placeholder="Número base" />
+      <button class="action-btn" onclick="generarTabla()">Generar Tabla</button>
+      <ul id="tablaResultado"></ul>
+    </section>
+
+    <section id="video">
+      <h2>Video Tutorial</h2>
+      <div id="video-container">
+        <video controls>
+          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+          Tu navegador no soporta video HTML5.
+        </video>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <form id="formContacto" onsubmit="enviarCorreo(event)">
+        <label for="emailNombre">Nombre:</label>
+        <input type="text" id="emailNombre" placeholder="Tu nombre" required />
+
+        <label for="emailMensaje">Mensaje:</label>
+        <textarea id="emailMensaje" placeholder="Escribe tu mensaje aquí..." rows="5" required style="width:100%; max-width:400px; padding:8px; font-size:1rem; border-radius:6px; border:1.5px solid #ccc;"></textarea>
+
+        <button class="action-btn" type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const botonesNav = document.querySelectorAll('nav button');
+    const secciones = document.querySelectorAll('main section');
+
+    botonesNav.forEach(btn => {
+      btn.addEventListener('click', () => {
+        botonesNav.forEach(b => b.classList.remove('active'));
+        secciones.forEach(sec => sec.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target).classList.add('active');
+      });
+    });
+
+    function calcular() {
+      const nombre = document.getElementById('nombreUsuario').value.trim();
+      const num1 = parseFloat(document.getElementById('numero1').value);
+      const num2 = parseFloat(document.getElementById('numero2').value);
+      const oper = document.getElementById('operacion').value;
+      const resDiv = document.getElementById('resultado');
+
+      if (!nombre) {
+        resDiv.textContent = 'Por favor, ingresa tu nombre.';
+        resDiv.style.color = '#c0392b';
+        return;
+      }
+      if (isNaN(num1) || isNaN(num2)) {
+        resDiv.textContent = 'Por favor, ingresa números válidos.';
+        resDiv.style.color = '#c0392b';
+        return;
+      }
+
+      let resultado;
+      switch (oper) {
+        case 'sumar': resultado = num1 + num2; break;
+        case 'restar': resultado = num1 - num2; break;
+        case 'multiplicar': resultado = num1 * num2; break;
+        case 'dividir':
+          if (num2 === 0) {
+            resDiv.textContent = 'Error: División entre cero no permitida.';
+            resDiv.style.color = '#c0392b';
+            return;
+          }
+          resultado = num1 / num2;
+          break;
+      }
+
+      resDiv.style.color = '#16a085';
+      resDiv.textContent = `${nombre}, el resultado es: ${resultado}`;
+    }
+
+    function generarTabla() {
+      const num = parseInt(document.getElementById('tablaNum').value);
+      const lista = document.getElementById('tablaResultado');
+      lista.innerHTML = '';
+
+      if (isNaN(num)) {
+        lista.innerHTML = '<li>Por favor, ingresa un número válido.</li>';
+        return;
+      }
+
+      for (let i = 1; i <= 10; i++) {
+        const li = document.createElement('li');
+        li.textContent = `${num} × ${i} = ${num * i}`;
+        lista.appendChild(li);
+      }
+    }
+
+    function enviarCorreo(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById('emailNombre').value.trim();
+      const mensaje = document.getElementById('emailMensaje').value.trim();
+
+      if (!nombre || !mensaje) {
+        alert('Por favor, completa ambos campos antes de enviar.');
+        return;
+      }
+
+      const email = 'CalculadoraPlus.cs@gmail.com';
+      const subject = encodeURIComponent(`Mensaje de ${nombre} desde Calculadora Plus`);
+      const body = encodeURIComponent(mensaje);
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    }
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        botonesNav.forEach(b => {
+          if (b.dataset.target === targetId) b.click();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
