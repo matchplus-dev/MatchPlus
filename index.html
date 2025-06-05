@@ -247,6 +247,7 @@
 <body>
   <header>
     <h1><a href="#" onclick="irAInicio()" style="text-decoration:none; color:inherit;">🧮 Math Plus</a></h1>
+  
     <nav>
       <button class="active" data-target="inicio">Inicio</button>
       <button data-target="calculadora">Calculadora</button>
@@ -311,15 +312,24 @@
       </select>
 
       <button class="action-btn" onclick="calcular()">Calcular</button>
-
+      
       <div id="resultado"></div>
     </section>
 
     <section id="tabla">
       <h2>Generar Tabla de Multiplicar</h2>
       <input type="number" id="tablaNum" placeholder="Número base" />
-      <button class="action-btn" onclick="generarTabla()">Generar Tabla</button>
-      <ul id="tablaResultado"></ul>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+  <button class="action-btn" onclick="generarTabla()">Generar Tabla</button>
+  <button class="action-btn" onclick="limpiarTabla()" style="background-color: #e74c3c;">Clear</button>
+</div>
+<ul id="tablaResultado"></ul>
+      <script>
+        function limpiarTabla() {
+          document.getElementById('tablaNum').value = '';
+          document.getElementById('tablaResultado').innerHTML = '';
+        }
+      </script>
     </section>
 
     <section id="video">
@@ -413,7 +423,10 @@
         lista.appendChild(li);
       }
     }
-
+function limpiarTabla() {
+  document.getElementById('tablaNum').value = '';
+  document.getElementById('tablaResultado').innerHTML = '';
+}
     function enviarCorreo(event) {
       event.preventDefault();
 
